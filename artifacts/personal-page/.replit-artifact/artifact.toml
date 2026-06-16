@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Edward Robinson — Personal Page"
+version = "1.0.0"
+id = "artifacts/personal-page"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21522
+
+[services.development]
+run = "pnpm --filter @workspace/personal-page run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/personal-page", "run", "build" ]
+publicDir = "artifacts/personal-page/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21522"
+BASE_PATH = "/"
